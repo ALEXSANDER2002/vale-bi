@@ -76,8 +76,8 @@ const useStyles = makeStyles({
     fontSize: '13px',
   },
   th: {
-    paddingTop: '11px',
-    paddingBottom: '11px',
+    paddingTop: '14px',
+    paddingBottom: '14px',
     paddingLeft: '16px',
     paddingRight: '16px',
     textAlign: 'left',
@@ -87,12 +87,12 @@ const useStyles = makeStyles({
     letterSpacing: '0.08em',
     color: G,
     backgroundColor: W,
-    borderBottom: `1px solid ${G}`,
+    borderBottom: `2px solid ${G}`,
     whiteSpace: 'normal',
   },
   td: {
-    paddingTop: '9px',
-    paddingBottom: '9px',
+    paddingTop: '12px',
+    paddingBottom: '12px',
     paddingLeft: '16px',
     paddingRight: '16px',
     borderBottom: `1px solid ${G}`,
@@ -1091,15 +1091,15 @@ export default function ComparePage() {
           <div className='print-only' style={{ display: 'none', padding: '20px 20px 0' }}>
             <Text weight='bold' size={400}>Relatório de Aderência</Text>
           </div>
-          <div style={{ paddingTop: '16px', paddingBottom: '12px', paddingLeft: '20px', paddingRight: '20px' }}>
+          <div style={{ paddingTop: '20px', paddingBottom: '20px', paddingLeft: '24px', paddingRight: '24px' }}>
             <div className={styles.header}>
               <div>
                 <Text size={400} weight="semibold" block>Aderência por posto inspecionado</Text>
-                <Text size={200} style={{ color: G }}>
+                <Text size={200} style={{ color: G, marginTop: '4px' }}>
                   {baseTable.name} vs {inspTable.name}
                 </Text>
               </div>
-              <div style={{ display: 'flex', gap: '6px' }} className="no-print">
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'flex-end' }} className="no-print">
                 <Button size="small" appearance="subtle" onClick={expandAll}>Expandir tudo</Button>
                 <Button size="small" appearance="subtle" onClick={collapseAll}>Recolher tudo</Button>
                 <Button size="small" appearance="outline" icon={<ArrowDownloadRegular />} onClick={exportAdherenceToXLSX}>Exportar XLSX</Button>
@@ -1109,7 +1109,7 @@ export default function ComparePage() {
           </div>
 
           {statusCol && (
-            <div style={{ paddingLeft: '20px', paddingRight: '20px', paddingBottom: '12px' }}>
+            <div style={{ paddingLeft: '24px', paddingRight: '24px', paddingBottom: '16px', borderBottom: `1px solid ${G}` }}>
               <TabList selectedValue={statusFilter} onTabSelect={(_, d) => setStatusFilter(d.value as 'ativo' | 'inativo')} size="small">
                 <Tab value="ativo">Postos Ativos</Tab>
                 <Tab value="inativo">Postos Inativos</Tab>
@@ -1117,26 +1117,26 @@ export default function ComparePage() {
             </div>
           )}
 
-          <div style={{ paddingLeft: '20px', paddingRight: '20px', paddingBottom: '12px', display: 'flex', gap: '12px', alignItems: 'center' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: '11px', fontWeight: 600, padding: '2px 8px', borderRadius: '2px', border: `1px solid ${G}`, backgroundColor: W, color: G }}>
+          <div style={{ paddingLeft: '24px', paddingRight: '24px', paddingTop: '16px', paddingBottom: '16px', display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: '12px', fontWeight: 600, padding: '6px 12px', borderRadius: '4px', border: `1.5px solid ${G}`, backgroundColor: W, color: G }}>
               {totals.total} postos
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: '11px', fontWeight: 600, padding: '2px 8px', borderRadius: '2px', border: `1px solid ${G}`, backgroundColor: W, color: G }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: '12px', fontWeight: 600, padding: '6px 12px', borderRadius: '4px', border: `1.5px solid ${G}`, backgroundColor: W, color: G }}>
               {totals.inspected} inspecionados
             </span>
             <span style={{
-              display: 'inline-flex', alignItems: 'center', fontSize: '11px', fontWeight: 600,
-              padding: '2px 8px', borderRadius: '2px',
-              border: `1px solid ${totals.adherence >= 80 ? G : Y}`,
+              display: 'inline-flex', alignItems: 'center', fontSize: '12px', fontWeight: 600,
+              padding: '6px 12px', borderRadius: '4px',
+              border: `1.5px solid ${totals.adherence >= 80 ? G : Y}`,
               backgroundColor: W,
               color: totals.adherence >= 80 ? G : Y
             }}>
               {totals.adherence}% aderência geral
             </span>
             <span style={{
-              display: 'inline-flex', alignItems: 'center', fontSize: '11px', fontWeight: 600,
-              padding: '2px 8px', borderRadius: '2px',
-              border: `1px solid ${totals.adherence === 100 ? G : Y}`,
+              display: 'inline-flex', alignItems: 'center', fontSize: '12px', fontWeight: 600,
+              padding: '6px 12px', borderRadius: '4px',
+              border: `1.5px solid ${totals.adherence === 100 ? G : Y}`,
               backgroundColor: W,
               color: totals.adherence === 100 ? G : Y
             }}>
