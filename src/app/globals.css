@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Vale S.A. Identidade Visual ─────────────────────────────────────
+   Verde Vale:   #00807C
+   Amarelo Vale: #EEA722
+   Branco:       #FFFFFF
+ ──────────────────────────────────────────────────────────────────── */
+
+:root {
+  --vale-green:        #00807C;
+  --vale-green-dark:   #00807C;
+  --vale-green-light:  #FFFFFF;
+  --vale-yellow:       #EEA722;
+  --vale-yellow-dark:  #EEA722;
+  --vale-yellow-light: #FFFFFF;
+  --vale-gray:         #00807C;
+  --vale-gray-light:   #FFFFFF;
+  --vale-black:        #00807C;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: var(--vale-green);
+  background-color: #FFFFFF;
+}
+
+/* ── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #EEA722; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #00807C; }
+
+/* Sidebar scrollbar (fundo verde) */
+aside ::-webkit-scrollbar-thumb { background: #EEA722; }
+aside ::-webkit-scrollbar-thumb:hover { background: #FFFFFF; }
+
+/* ── Recharts ─── */
+.recharts-responsive-container { min-height: 0 !important; }
+
+/* ── Transitions ─── */
+a { text-decoration: none; }
+a, button { transition: opacity 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
+
+/* ── Vale Yellow accent selection ─── */
+::selection {
+  background-color: #EEA722;
+  color: #FFFFFF;
+}
+
+/* ── Refined Corporate styling for Fluent UI components ── */
+.fui-Button {
+  border-radius: 2px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  font-size: 10.5px !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: all 0.15s ease-in-out !important;
+  box-shadow: none !important;
+}
+
+.fui-Button[appearance="primary"] {
+  background-color: #00807C !important;
+  color: #FFFFFF !important;
+  border: 1px solid #00807C !important;
+}
+
+.fui-Button[appearance="primary"]:hover {
+  background-color: #EEA722 !important;
+  border-color: #EEA722 !important;
+  color: #FFFFFF !important;
+}
+
+.fui-Button[appearance="outline"] {
+  border: 1px solid #00807C !important;
+  color: #00807C !important;
+  background-color: #FFFFFF !important;
+}
+
+.fui-Button[appearance="outline"]:hover {
+  background-color: #00807C !important;
+  color: #FFFFFF !important;
+  border-color: #00807C !important;
+}
+
+.fui-Button[appearance="subtle"] {
+  color: #00807C !important;
+  text-transform: none !important;
+  font-size: 11px !important;
+  letter-spacing: normal !important;
+  border-radius: 2px !important;
+}
+
+.fui-Button[appearance="subtle"]:hover {
+  background-color: #FFFFFF !important;
+  color: #EEA722 !important;
+}
+
+.fui-Card {
+  border: 1px solid #00807C !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  background-color: #FFFFFF !important;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+}
+
+.fui-Input {
+  border-radius: 2px !important;
+  border: 1px solid #00807C !important;
+  background-color: #FFFFFF !important;
+}
+
+.fui-Input:focus-within {
+  border-color: #EEA722 !important;
+  outline: none !important;
+}
+
+.fui-Badge {
+  border-radius: 2px !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.04em !important;
+}
+
+.fui-Select {
+  border-radius: 2px !important;
+  border: 1px solid #00807C !important;
+  background-color: #FFFFFF !important;
+}
+
+.fui-Select select {
+  border: none !important;
+  background-color: transparent !important;
+  color: #00807C !important;
+  font-size: 12px !important;
+  border-radius: 2px !important;
+}
+
+.fui-Select:focus-within {
+  border-color: #EEA722 !important;
+}
+
+.fui-TabList {
+  border-bottom: 1px solid #00807C !important;
+}
+
+.fui-Tab {
+  border-radius: 2px 2px 0 0 !important;
+  border: 1px solid transparent !important;
+  color: #00807C !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin-right: 4px !important;
+  padding: 6px 12px !important;
+}
+
+.fui-Tab:hover {
+  color: #EEA722 !important;
+}
+
+.fui-Tab[aria-selected="true"], .fui-Tab--selected {
+  border-color: #00807C #00807C transparent #00807C !important;
+  background-color: #FFFFFF !important;
+  color: #00807C !important;
+}
+
+.print-only {
+  display: none !important;
+}
+
+/* ── Print Styles ── */
+@media print {
+  * {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  aside, header, nav, .no-print, button, .fui-Button, .fui-TabList {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  #__next, [class*="root_"], [class*="body_"], [class*="main_"], main, [class*="page_"] {
+    margin: 0 !important;
+    padding: 2mm !important;
+    height: auto !important;
+    overflow: visible !important;
+    max-height: none !important;
+    max-width: none !important;
+    background-color: #FFFFFF !important;
+    color: #00807C !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .fui-Card {
+    border: 1px solid #00807C !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background-color: #FFFFFF !important;
+    page-break-inside: auto;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: auto;
+    table-layout: auto !important;
+    margin: 0 !important;
+    font-size: 5.5px !important;
+    min-width: 100% !important;
+    overflow: visible !important;
+  }
+  
+  thead {
+    display: table-header-group !important;
+  }
+
+  tbody {
+    display: table-row-group !important;
+  }
+
+  tr {
+    display: table-row !important;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    display: table-cell !important;
+    border: 0.5px solid #00807C !important;
+    padding: 1px 2px !important;
+    font-size: 5.5px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+    text-align: left !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.1 !important;
+  }
+
+  th {
+    background-color: #FFFFFF !important;
+    font-weight: bold !important;
+    color: #00807C !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  td {
+    background-color: #FFFFFF !important;
+    color: #00807C !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  @page {
+    margin: 1mm;
+    size: A4 landscape;
+  }
+
+  /* Esconder elementos que não devem imprimir */
+  [class*="tableWrap"], .tableWrap {
+    overflow: visible !important;
+    max-width: 100% !important;
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  div, [class*="Wrap"], [class*="Container"], [class*="Card"] {
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+
+  /* Forçar visibilidade de elementos importantes */
+  .fui-FluentProvider {
+    display: block !important;
+    background: #FFFFFF !important;
+    width: 100% !important;
+  }
+
+  /* Garantir que barras de rolagem não apareçam */
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  body::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+
