@@ -17,12 +17,33 @@ GREY = '#666666'
 LIGHT_GREY = '#E0E0E0'
 
 # 1. Configurações de arquivos
-base_file = 'data (10) (1)(Base de dados 2026).csv'
-export_file = 'data (10) (1)(Export).csv'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_file = os.path.join(script_dir, 'data (10) (1)(Base de dados 2026).csv')
+export_file = os.path.join(script_dir, 'data (10) (1)(Export).csv')
 
-if not os.path.exists(base_file) or not os.path.exists(export_file):
-    print("Erro: Arquivos de dados de entrada não encontrados no diretório!")
-    exit(1)
+has_files = os.path.exists(base_file) and os.path.exists(export_file)
+
+if not has_files:
+    print("Aviso: Arquivos de dados de entrada não encontrados no diretório!")
+    base_df = None
+    export_df = None
+    code_col = status_col = name_col = owner_col = gerencia_col = insp_col = date_col = None
+    recent_period = None
+    data_acumulado_ativos = []
+    uninspected_acumulado_ativos = []
+    data_mensal_ativos = []
+    uninspected_mensal_ativos = []
+    main_adherence_data = []
+    main_uninspected = []
+    main_label = ""
+    extra_adherence_data = None
+    extra_uninspected = None
+    extra_label = ""
+    tot_postos = 0
+    tot_insp = 0
+    adh_geral = 0
+    if __name__ == '__main__':
+        exit(1)
 
 # 2. Funções de Normalização e Cruzamento (idênticas ao app Next.js)
 def normalize_digits(digits):
@@ -96,26 +117,27 @@ def format_date_br(iso):
         return iso
     return f"{parts[2]}/{parts[1]}/{parts[0]}"
 
-# 3. Leitura dos dados usando Pandas (Latin1 encoding para acentos)
-print("Carregando bases...")
-base_df = pd.read_csv(base_file, encoding='latin1', sep=None, engine='python')
-export_df = pd.read_csv(export_file, encoding='latin1', sep=None, engine='python')
+else:
+    # 3. Leitura dos dados usando Pandas (Latin1 encoding para acentos)
+    print("Carregando bases...")
+    base_df = pd.read_csv(base_file, encoding='latin1', sep=None, engine='python')
+    export_df = pd.read_csv(export_file, encoding='latin1', sep=None, engine='python')
 
-# Detectar colunas automaticamente
-code_col = next((c for c in base_df.columns if re.search(r'CodigoPosto|WorkstationCode', c, re.I)), base_df.columns[0])
-status_col = next((c for c in base_df.columns if re.search(r'StatusPosto|WorkstationStatus|status', c, re.I)), None)
-name_col = next((c for c in base_df.columns if re.search(r'NomePosto|WorkstationName|nome.*posto', c, re.I)), None)
-owner_col = next((c for c in base_df.columns if re.search(r'DonoPosto/WorkstationOwner|DonoPosto', c, re.I)), None)
-gerencia_col = next((c for c in base_df.columns if re.search(r'VP-4', c, re.I)), None)
-if not gerencia_col:
-    gerencia_col = next((c for c in base_df.columns if re.search(r'VP-3', c, re.I)), None)
-if not gerencia_col:
-    gerencia_col = next((c for c in base_df.columns if re.search(r'gerencia|gerência', c, re.I)), base_df.columns[0])
+    # Detectar colunas automaticamente
+    code_col = next((c for c in base_df.columns if re.search(r'CodigoPosto|WorkstationCode', c, re.I)), base_df.columns[0])
+    status_col = next((c for c in base_df.columns if re.search(r'StatusPosto|WorkstationStatus|status', c, re.I)), None)
+    name_col = next((c for c in base_df.columns if re.search(r'NomePosto|WorkstationName|nome.*posto', c, re.I)), None)
+    owner_col = next((c for c in base_df.columns if re.search(r'DonoPosto/WorkstationOwner|DonoPosto', c, re.I)), None)
+    gerencia_col = next((c for c in base_df.columns if re.search(r'VP-4', c, re.I)), None)
+    if not gerencia_col:
+        gerencia_col = next((c for c in base_df.columns if re.search(r'VP-3', c, re.I)), None)
+    if not gerencia_col:
+        gerencia_col = next((c for c in base_df.columns if re.search(r'gerencia|gerência', c, re.I)), base_df.columns[0])
 
-insp_col = next((c for c in export_df.columns if re.search(r'T.tulo do Incidente|titulo|título', c, re.I)), export_df.columns[0])
-date_col = next((c for c in export_df.columns if re.search(r'Data Incidente|data', c, re.I)), None)
+    insp_col = next((c for c in export_df.columns if re.search(r'T.tulo do Incidente|titulo|título', c, re.I)), export_df.columns[0])
+    date_col = next((c for c in export_df.columns if re.search(r'Data Incidente|data', c, re.I)), None)
 
-print(f"Colunas Utilizadas:\n - Base Código: {code_col}\n - Base Status: {status_col}\n - Base Gerência: {gerencia_col}\n - Export Ref: {insp_col}\n - Export Data: {date_col}")
+    print(f"Colunas Utilizadas:\n - Base Código: {code_col}\n - Base Status: {status_col}\n - Base Gerência: {gerencia_col}\n - Export Ref: {insp_col}\n - Export Data: {date_col}")
 
 # 4. Processamento de Aderência
 def get_adherence_data(active_only=True, period=None):

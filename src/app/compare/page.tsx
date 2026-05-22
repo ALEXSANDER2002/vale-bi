@@ -368,6 +368,7 @@ export default function ComparePage() {
       { s: { r: 1, c: 0 }, e: { r: 1, c: 5 } },
       { s: { r: 2, c: 0 }, e: { r: 2, c: 5 } }
     ]
+    wsSummary['!pageSetup'] = { orientation: 'portrait', paperSize: 1 }
     XLSX.utils.book_append_sheet(wb, wsSummary, 'Painel Geral')
 
     const detailedRows: (string | number)[][] = [
@@ -435,6 +436,7 @@ export default function ComparePage() {
       { wch: 18 }, // Última Inspeção
       { wch: 15 }  // Status
     ]
+    wsDetailed['!pageSetup'] = { orientation: 'portrait', paperSize: 1 }
     XLSX.utils.book_append_sheet(wb, wsDetailed, `Aderência ${statusFilter === 'ativo' ? 'Ativos' : 'Inativos'}`)
 
     // 3. Planilha de Pendentes (Agrupados por Coordenador)
@@ -472,6 +474,7 @@ export default function ComparePage() {
       { wch: 26 }, // Coordenador
       { wch: 30 }  // Gerência
     ]
+    wsPending['!pageSetup'] = { orientation: 'portrait', paperSize: 1 }
     XLSX.utils.book_append_sheet(wb, wsPending, 'Postos Pendentes')
 
     const statusText = statusFilter === 'ativo' ? 'Ativos' : 'Inativos'
@@ -515,6 +518,7 @@ export default function ComparePage() {
       { wch: 26 }, // Coordenador
       { wch: 30 }  // Gerência
     ]
+    ws['!pageSetup'] = { orientation: 'portrait', paperSize: 1 }
     XLSX.utils.book_append_sheet(wb, ws, 'Postos Pendentes')
     XLSX.writeFile(wb, `Postos_Pendentes_${baseTable?.name || 'Vale'}.xlsx`)
   }

@@ -286,7 +286,7 @@ a, button { transition: opacity 0.15s ease, background-color 0.15s ease, box-sha
 
   @page {
     margin: 1mm;
-    size: A4 landscape;
+    size: A4 portrait;
   }
 
   /* Esconder elementos que não devem imprimir */
