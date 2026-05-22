@@ -102,17 +102,9 @@ const useStyles = makeStyles({
   groupRow: {
     cursor: 'pointer',
     backgroundColor: W,
-    ':hover': {
-      backgroundColor: G,
-      color: W,
-    },
   },
   childRow: {
     backgroundColor: W,
-    ':hover': {
-      backgroundColor: G,
-      color: W,
-    },
   },
   progressCell: {
     display: 'flex',
