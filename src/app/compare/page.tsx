@@ -205,7 +205,7 @@ export default function ComparePage() {
   const [uninspOpen, setUninspOpen] = useState(false)
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
-  const [matchMode, setMatchMode] = useState<MatchMode>('raw')
+  const [matchMode, setMatchMode] = useState<MatchMode>('post')
   const periodInitialized = useRef(false)
 
   const [baseId, setBaseId] = useState<string>('')
