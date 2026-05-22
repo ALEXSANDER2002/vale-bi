@@ -127,7 +127,7 @@ const useStyles = makeStyles({
     paddingLeft: '65px',
   },
   postRow: {
-    backgroundColor: '#FFF3D6',
+    backgroundColor: W,
   },
   summaryRow: {
     backgroundColor: W,
@@ -1324,27 +1324,27 @@ function GroupRows({
           child.missingPosts.forEach((post) => {
             rows.push(
               <tr key={`${child.name}-${post.code}`} className={styles.postRow}>
-                <td className={mergeClasses(styles.td, styles.postIndent)} style={{ color: '#7F5A00', fontWeight: '500' }}>
+                <td className={mergeClasses(styles.td, styles.postIndent)} style={{ fontWeight: '500' }}>
                   ↳ {post.code} - {post.name}
                 </td>
-                <td className={styles.td} style={{ color: '#7F5A00' }}>—</td>
-                <td className={styles.td} style={{ color: '#7F5A00' }}>—</td>
+                <td className={styles.td}>—</td>
+                <td className={styles.td}>—</td>
                 <td className={styles.td}>
                   <div className={styles.progressCell}>
                     <div style={{ flex: 1, minWidth: '80px', height: '8px', border: `1px solid ${Y}`, backgroundColor: W, borderRadius: '2px', overflow: 'hidden' }}>
                       <div style={{ width: '0%', height: '100%', backgroundColor: Y }} />
                     </div>
-                    <Text size={200} style={{ minWidth: '36px', textAlign: 'right', color: '#7F5A00' }}>0%</Text>
+                    <Text size={200} style={{ minWidth: '36px', textAlign: 'right' }}>0%</Text>
                   </div>
                 </td>
-                {showDate && <td className={styles.td} style={{ color: '#7F5A00' }}>—</td>}
+                {showDate && <td className={styles.td}>—</td>}
                 <td className={styles.td}>
                   <span style={{
                     display: 'inline-flex', alignItems: 'center', gap: '4px',
                     fontSize: '11px', fontWeight: 600,
                     color: Y,
                     backgroundColor: W,
-                    padding: '2px 8px', borderRadius: '2px',
+                    padding: '4px 8px', borderRadius: '3px',
                     border: `1px solid ${Y}`,
                   }}>
                     Faltando
