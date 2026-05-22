@@ -200,6 +200,7 @@ export default function ComparePage() {
 
   const [statusFilter, setStatusFilter] = useState<'ativo' | 'inativo'>('ativo')
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
+  const [expandedCoords, setExpandedCoords] = useState<Set<string>>(new Set())
   const [configOpen, setConfigOpen] = useState(false)
   const [diagOpen, setDiagOpen] = useState(false)
   const [uninspOpen, setUninspOpen] = useState(false)
@@ -1170,6 +1171,13 @@ export default function ComparePage() {
                     group={group}
                     isExpanded={expanded.has(group.name)}
                     onToggle={() => toggleGroup(group.name)}
+                    expandedCoords={expandedCoords}
+                    onToggleCoord={(coordKey) => {
+                      const newSet = new Set(expandedCoords)
+                      if (newSet.has(coordKey)) newSet.delete(coordKey)
+                      else newSet.add(coordKey)
+                      setExpandedCoords(newSet)
+                    }}
                     styles={styles}
                     showDate={!!dateCol}
                   />
@@ -1239,11 +1247,13 @@ function StatusBadge({ adherence, missingCount }: { adherence: number; missingCo
 }
 
 function GroupRows({
-  group, isExpanded, onToggle, styles, showDate,
+  group, isExpanded, onToggle, expandedCoords, onToggleCoord, styles, showDate,
 }: {
   group: AdherenceGroup
   isExpanded: boolean
   onToggle: () => void
+  expandedCoords: Set<string>
+  onToggleCoord: (coordKey: string) => void
   styles: Record<string, string>
   showDate: boolean
 }) {
@@ -1281,9 +1291,15 @@ function GroupRows({
         <td className={styles.td}><StatusBadge adherence={group.adherence} missingCount={group.total - group.inspected} /></td>
       </tr>
       {isExpanded && group.children.flatMap((child) => {
+        const coordKey = `${group.name}||${child.name}`
+        const isCoordExpanded = expandedCoords.has(coordKey)
+        
         const rows = [
-          <tr key={child.name} className={styles.childRow}>
+          <tr key={child.name} className={styles.childRow} onClick={() => onToggleCoord(coordKey)} style={{ cursor: 'pointer' }}>
             <td className={mergeClasses(styles.td, styles.childIndent)}>
+              <span className={styles.expandIcon}>
+                {isCoordExpanded ? <ChevronDownRegular fontSize={12} /> : <ChevronRightRegular fontSize={12} />}
+              </span>
               <Text size={200}>{child.name}</Text>
             </td>
             <td className={styles.td}><Text size={200}>{child.total.toLocaleString('pt-BR')}</Text></td>
@@ -1312,7 +1328,7 @@ function GroupRows({
           </tr>
         ]
 
-        if (child.missingPosts && child.missingPosts.length > 0) {
+        if (isCoordExpanded && child.missingPosts && child.missingPosts.length > 0) {
           child.missingPosts.forEach((post) => {
             rows.push(
               <tr key={`${child.name}-${post.code}`} className={styles.postRow}>
