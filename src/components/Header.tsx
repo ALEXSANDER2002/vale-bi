@@ -71,23 +71,6 @@ const useStyles = makeStyles({
     flexShrink: 0,
   },
 
-  /* Tag "Vale Analytics" — Verde Vale sólido */
-  valeTag: {
-    display: 'none',
-    '@media (min-width: 768px)': {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '7px',
-      paddingTop: '5px',
-      paddingBottom: '5px',
-      paddingLeft: '12px',
-      paddingRight: '12px',
-      borderRadius: '99px',
-      backgroundColor: G,
-      border: `1px solid ${G}`,
-    },
-  },
-
   /* Badge individual de tabela — Amarelo Vale sólido */
   tableBadge: {
     display: 'none',
@@ -172,13 +155,6 @@ export default function Header() {
           </div>
         )}
 
-        {/* Tag "Vale Analytics" — sempre visível no desktop */}
-        <div className={styles.valeTag}>
-          <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: Y, flexShrink: 0 }} />
-          <Text style={{ fontSize: '11px', fontWeight: 700, color: W, letterSpacing: '0.04em' }}>
-            Vale Analytics
-          </Text>
-        </div>
 
         {/* Botão de importar quando não há tabelas */}
         {tables.length === 0 && (
